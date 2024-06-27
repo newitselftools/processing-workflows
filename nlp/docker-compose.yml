@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  nlp:
+    image: ghcr.io/newitselftools/newsapi/nlp:latest
+    container_name: nlp
+    ports:
+      - "5000:5000"
+
+  nlp-zs:
+    image: ghcr.io/newitselftools/newsapi/nlp-zs:latest
+    container_name: nlp-zs
+    ports:
+      - "5001:5001"
+
+  worker-nlp:
+    image: ghcr.io/newitselftools/newsapi/worker-nlp:latest
+    container_name: worker-nlp
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    depends_on:
+      - nlp
+      - nlp-zs
+    links:
+      - nlp
+      - nlp-zs

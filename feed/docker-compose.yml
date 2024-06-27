@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  worker-feed:
+    image: ghcr.io/newitselftools/newsapi/worker-feed:latest
+    container_name: worker-feed
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro

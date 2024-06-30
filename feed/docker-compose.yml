@@ -1,11 +1,58 @@
 version: '3.8'
 
 services:
-  worker-feed:
+  worker-feed-1:
     image: ghcr.io/newitselftools/newsapi/worker-feed:latest
-    container_name: worker-feed
+    container_name: worker-feed-1
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
       - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+
+  worker-feed-2:
+    image: ghcr.io/newitselftools/newsapi/worker-feed:latest
+    container_name: worker-feed-2
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+
+  worker-feed-3:
+    image: ghcr.io/newitselftools/newsapi/worker-feed:latest
+    container_name: worker-feed-3
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+
+  worker-feed-4:
+    image: ghcr.io/newitselftools/newsapi/worker-feed:latest
+    container_name: worker-feed-4
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G

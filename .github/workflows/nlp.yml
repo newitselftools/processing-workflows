@@ -37,8 +37,8 @@ jobs:
       - name: Run Docker Compose
         run: |
           cd ./nlp
-          docker-compose up -d
-          docker-compose logs -f
+          docker compose up -d
+          docker compose logs -f
         env:
           ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
         timeout-minutes: 60
@@ -55,4 +55,3 @@ jobs:
         with:
           name: top-log
           path: top_log.txt
-

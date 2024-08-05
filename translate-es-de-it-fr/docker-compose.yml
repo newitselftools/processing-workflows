@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nlp-translation-es-de-it-fr:
+    image: ghcr.io/newitselftools/newsapi/nlp-translation-es-de-it-fr:latest
+    container_name: nlp-translation-es-de-it-fr
+    ports:
+      - "5004:5004"
+    deploy:
+      resources:
+        limits:
+          cpus: '3.8'
+          memory: 14G
+
+  worker-translate:
+    image: ghcr.io/newitselftools/newsapi/worker-translate-es-de-it-fr:latest
+    container_name: worker-translate-es-de-it-fr
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+      - HF_API_KEY=${HF_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    depends_on:
+      - nlp-translation-es-de-it-fr
+    links:
+      - nlp-translation-es-de-it-fr
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 512M

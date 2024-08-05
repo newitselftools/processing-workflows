@@ -12,7 +12,7 @@ services:
           cpus: '3.8'
           memory: 14G
 
-  worker-translate:
+  worker-translate-es-de-it-fr:
     image: ghcr.io/newitselftools/newsapi/worker-translate-es-de-it-fr:latest
     container_name: worker-translate-es-de-it-fr
     environment:

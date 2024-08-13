@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  full-content:
+    image: ghcr.io/newitselftools/newsapi/full-content:latest
+    container_name: full-content
+    ports:
+      - "5005:5005"
+    deploy:
+      resources:
+        limits:
+          cpus: '3.8'
+          memory: 14G
+
+  worker-full-content:
+    image: ghcr.io/newitselftools/newsapi/worker-full-content:latest
+    container_name: worker-full-content
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
+      - HF_API_KEY=${HF_API_KEY}
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
+    depends_on:
+      - full-content
+    links:
+      - full-content
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 512M

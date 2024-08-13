@@ -1,0 +1,57 @@
+name: Full Content
+on:
+  workflow_dispatch:
+
+jobs:
+  run-services:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}'
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Start top logging
+        run: |
+          chmod +x log_top.sh
+          ./log_top.sh > top_log.txt &
+          echo $! > top_log_pid.txt
+
+      - name: Run Docker Compose
+        run: |
+          cd ./full-content
+          docker compose up -d
+          docker compose logs -f
+        env:
+          ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+        timeout-minutes: 60
+
+      - name: Stop top logging
+        if: always()
+        run: |
+          kill $(cat top_log_pid.txt)
+          rm top_log_pid.txt
+
+      - name: Upload top log
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: top-log
+          path: top_log.txt

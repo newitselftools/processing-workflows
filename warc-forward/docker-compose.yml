@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  warc:
+    image: ghcr.io/newitselftools/newsapi/worker-warc-forward:latest
+    container_name: worker-warc-forward
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+    volumes:
+      - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro

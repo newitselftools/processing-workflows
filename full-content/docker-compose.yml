@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   full-content:
     image: ghcr.io/newitselftools/newsapi/full-content:latest

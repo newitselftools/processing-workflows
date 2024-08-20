@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nlp-translation-es-de-it-fr:
     image: ghcr.io/newitselftools/newsapi/nlp-translation-es-de-it-fr:latest

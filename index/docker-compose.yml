@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   worker-index:
     image: ghcr.io/newitselftools/newsapi/worker-index:latest

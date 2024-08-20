@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   warc:
     image: ghcr.io/newitselftools/newsapi/warc:latest

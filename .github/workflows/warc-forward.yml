@@ -41,6 +41,7 @@ jobs:
           docker compose logs -f
         env:
           ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
+          MOZ_API_KEY: ${{ secrets.MOZ_API_KEY }}
         timeout-minutes: 60
 
       - name: Stop top logging

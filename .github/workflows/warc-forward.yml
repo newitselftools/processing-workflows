@@ -42,7 +42,7 @@ jobs:
         env:
           ELASTICSEARCH_API_KEY: ${{ secrets.ELASTICSEARCH_API_KEY }}
           MOZ_API_KEY: ${{ secrets.MOZ_API_KEY }}
-        timeout-minutes: 60
+        timeout-minutes: 180
 
       - name: Stop top logging
         if: always()

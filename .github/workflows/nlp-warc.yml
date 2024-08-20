@@ -1,4 +1,4 @@
-name: NLP
+name: NLP Warc
 on:
   workflow_dispatch:
 

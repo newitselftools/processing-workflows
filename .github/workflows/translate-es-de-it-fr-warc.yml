@@ -1,4 +1,4 @@
-name: Translate ES DE IT FR
+name: Translate ES DE IT FR Warc
 on:
   workflow_dispatch:
 

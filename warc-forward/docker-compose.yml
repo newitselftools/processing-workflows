@@ -4,6 +4,7 @@ services:
     container_name: worker-warc-forward
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
+      - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}
       - MOZ_API_KEY=${MOZ_API_KEY}
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro

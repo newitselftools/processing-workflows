@@ -10,9 +10,9 @@ services:
           cpus: '3.8'
           memory: 14G
 
-  worker-translate:
-    image: ghcr.io/newitselftools/newsapi/worker-translate:latest
-    container_name: worker-translate
+  worker-translate101:
+    image: ghcr.io/newitselftools/newsapi/worker-translate101:latest
+    container_name: worker-translate101
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/gcp/creds.json
       - ELASTICSEARCH_API_KEY=${ELASTICSEARCH_API_KEY}

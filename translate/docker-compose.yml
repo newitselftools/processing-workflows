@@ -1,6 +1,6 @@
 services:
   nlp-translation101:
-    image: ghcr.io/newitselftools/newsapi/nlp-translation:latest
+    image: ghcr.io/newitselftools/newsapi/nlp-translation101:latest
     container_name: nlp-translation101
     ports:
       - "5008:5008"

@@ -3,7 +3,7 @@ services:
     image: ghcr.io/newitselftools/newsapi/nlp-translation:latest
     container_name: nlp-translation
     ports:
-      - "5003:5003"
+      - "5008:5008"
     deploy:
       resources:
         limits:

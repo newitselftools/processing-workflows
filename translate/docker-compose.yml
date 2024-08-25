@@ -1,7 +1,7 @@
 services:
-  nlp-translation:
+  nlp-translation101:
     image: ghcr.io/newitselftools/newsapi/nlp-translation:latest
-    container_name: nlp-translation
+    container_name: nlp-translation101
     ports:
       - "5008:5008"
     deploy:
@@ -20,9 +20,9 @@ services:
     volumes:
       - ${GOOGLE_APPLICATION_CREDENTIALS}:/gcp/creds.json:ro
     depends_on:
-      - nlp-translation
+      - nlp-translation101
     links:
-      - nlp-translation
+      - nlp-translation101
     deploy:
       resources:
         limits:
